@@ -8,6 +8,7 @@ from googletrans import Translator
 translator = Translator()
 import preprocessor2
 import base64
+import seaborn as sns
 
 
 def add_bg_from_local(image_file):
@@ -93,6 +94,50 @@ if uploaded_file is not None:
                 st.title("Links")
                 st.title(links)
 
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.title("Monthly Timeline")
+                timeline = helper.monthly_timeline(selected_user, df)
+                fig, ax = plt.subplots()
+                ax.plot(timeline['time'], timeline['message'], color='green')
+                plt.xticks(rotation='vertical')
+                st.pyplot(fig)
+
+            with col2:
+                st.title("Daily Timeline")
+                daily_timeline = helper.daily_timeline(selected_user, df)
+                fig, ax = plt.subplots()
+                ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='black')
+                plt.xticks(rotation='vertical')
+                st.pyplot(fig)
+
+
+
+
+
+
+
+            st.title('Activity Map')
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.header("Most busy day")
+                busy_day = helper.week_activity_map(selected_user, df)
+                fig, ax = plt.subplots()
+                ax.bar(busy_day.index, busy_day.values, color='purple')
+                plt.xticks(rotation='vertical')
+                st.pyplot(fig)
+
+            with col2:
+                st.header("Most busy month")
+                busy_month = helper.month_activity_map(selected_user, df)
+                fig, ax = plt.subplots()
+                ax.bar(busy_month.index, busy_month.values, color='orange')
+                plt.xticks(rotation='vertical')
+                st.pyplot(fig)
+
+
             if selected_user=="Overall":
                 st.title("Most_Active_Users")
                 x , new_df = helper.most_active_users(df)
@@ -107,11 +152,53 @@ if uploaded_file is not None:
                 with col2:
                     st.dataframe(new_df)
 
+            col1, col2 = st.columns(2)
+            with col1:
+                st.title("Weekly Activity Map")
+                user_heatmap = helper.activity_heatmap(selected_user, df)
+                fig, ax = plt.subplots()
+                ax = sns.heatmap(user_heatmap)
+                st.pyplot(fig)
 
-            df_wc = helper.create_word_cloud(selected_user ,df)
-            fig , ax = plt.subplots()
-            ax.imshow(df_wc)
+            with col2:
+                st.title("wordCloud")
+                df_wc = helper.create_word_cloud(selected_user, df)
+                fig, ax = plt.subplots()
+                ax.imshow(df_wc)
+                st.pyplot(fig)
+
+            most_common_df = helper.most_common_words(selected_user, df)
+
+            fig, ax = plt.subplots()
+
+            ax.barh(most_common_df[0], most_common_df[1])
+            plt.xticks(rotation='vertical')
+
+            st.title('Most common words')
             st.pyplot(fig)
+
+
+
+
+            st.header("Sentimental Analysis")
+            a , b , c = helper.senti(selected_user ,df)
+            list =["Positive" , "Negative" , "Neutral"]
+            score = [a , b , c]
+            fig, ax = plt.subplots()
+
+            ax.pie( score ,labels=list ,autopct='%.2f%%')
+            plt.xticks(rotation='vertical')
+            st.pyplot(fig)
+            #st.title(a)
+            #st.title(b)
+            #st.title(c)
+
+
+
+
+
+
+
 
 
 
