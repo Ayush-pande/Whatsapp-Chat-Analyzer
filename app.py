@@ -2,7 +2,7 @@ import os
 os.system("pip install googletrans==3.1.0a0")
 import os
 os.system("pip install matplotlib")
-pip install -r requirements.txt
+
 
 #import googletrans
 from io import StringIO
