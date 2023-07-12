@@ -1,6 +1,8 @@
 import os
 os.system("pip install googletrans==3.1.0a0")
-import googletrans
+import os
+os.system("pip install matplotlib")
+#import googletrans
 from io import StringIO
 import streamlit as st
 import matplotlib.pyplot as plt
