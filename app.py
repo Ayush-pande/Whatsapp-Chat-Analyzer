@@ -84,7 +84,7 @@ if uploaded_file is not None:
         selected_user = st.sidebar.selectbox("Show Analysis", user_list)
         if st.sidebar.button("Show Analysis"):
 
-            num_messages, words , num_media_file ,links = helper.fetch_stats(selected_user, df)
+            num_messages, words , num_media_file = helper.fetch_stats(selected_user, df)
             col1, col2, col3, col4 = st.columns(4)
 
             with col1:
@@ -96,9 +96,9 @@ if uploaded_file is not None:
             with col3:
                 st.title("Media Files")
                 st.title(num_media_file)
-            with col4:
-                st.title("Links")
-                st.title(links)
+           # with col4:
+                #st.title("Links")
+               # st.title(links)
 
             col1, col2 = st.columns(2)
 
