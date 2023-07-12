@@ -1,5 +1,5 @@
-from urlextract  import URLExtract
-extract = URLExtract()
+#from urlextract  import URLExtract
+#extract = URLExtract()
 import matplotlib as plt
 from wordcloud import WordCloud
 import pandas as pd
@@ -17,11 +17,11 @@ def fetch_stats(selected_user , df):
         words.extend(i.split())
 
     num_media_messages = df[df["message"]=='<Media omitted>\n'].shape[0]
-    links =[]
-    for message in df["message"]:
-        links.extend(extract.find_urls(message))
+   ## links =[]
+    #for message in df["message"]:
+       # links.extend(extract.find_urls(message))
 
-    return num_messages , len(words) , num_media_messages  , len(links)
+    return num_messages , len(words) , num_media_messages  
 
 def most_active_users(df):
     x = df["user"].value_counts().head()
