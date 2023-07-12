@@ -1,4 +1,5 @@
-sudo python3 -m pip install googletrans==3.1.0a0
+import os
+os.system("pip install googletrans==3.1.0a0")
 import googletrans
 from io import StringIO
 import streamlit as st
