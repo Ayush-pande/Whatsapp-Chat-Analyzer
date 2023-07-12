@@ -1,4 +1,4 @@
-import googletrans
+#import googletrans
 from io import StringIO
 import streamlit as st
 import matplotlib.pyplot as plt
