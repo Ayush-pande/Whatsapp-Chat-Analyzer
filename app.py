@@ -1,4 +1,7 @@
-#import googletrans
+pip install googletrans==3.1.0a0
+
+
+import googletrans
 from io import StringIO
 import streamlit as st
 import matplotlib.pyplot as plt
